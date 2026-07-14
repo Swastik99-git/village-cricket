@@ -17,7 +17,7 @@ export default function AboutFounder() {
         {/* Founder Card */}
         <div className="card p-6 mb-5 text-center">
           <img
-            src="/images/profile_swastik.jpeg"
+            src="../public/images/profile_swastik.jpeg"
             alt="Swastik Biswal"
             className="w-24 h-24 rounded-full object-cover ring-4 ring-cricket-100 dark:ring-gray-700 mx-auto mb-4"
           />
