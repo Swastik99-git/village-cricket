@@ -274,7 +274,7 @@ function FounderSection() {
       <div className="card p-5">
         <div className="flex items-center gap-4 mb-4">
           <img
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200"
+            src="/images/profile_swastik.jpeg"
             alt="Swastik Biswal"
             className="w-16 h-16 rounded-full object-cover ring-2 ring-cricket-100 dark:ring-gray-700"
           />
@@ -289,7 +289,7 @@ function FounderSection() {
         </p>
         <div className="flex flex-wrap gap-2">
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/917609065467"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary text-sm py-2 px-3"
@@ -297,18 +297,18 @@ function FounderSection() {
             WhatsApp
           </a>
           <a
-            href="https://instagram.com"
+             href="https://www.instagram.com/__the_dimple_guy___/?hl=en"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary text-sm py-2 px-3"
           >
             Instagram
           </a>
-          <a href="mailto:swastik@example.com" className="btn-secondary text-sm py-2 px-3">
+          <a href="mailto:swastikbiswal18@gmail.com" className="btn-secondary text-sm py-2 px-3">
             Email
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/Swastik99-git"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary text-sm py-2 px-3"

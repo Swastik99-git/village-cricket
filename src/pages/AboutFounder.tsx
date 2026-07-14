@@ -17,7 +17,7 @@ export default function AboutFounder() {
         {/* Founder Card */}
         <div className="card p-6 mb-5 text-center">
           <img
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400"
+            src="/images/profile_swastik.jpeg"
             alt="Swastik Biswal"
             className="w-24 h-24 rounded-full object-cover ring-4 ring-cricket-100 dark:ring-gray-700 mx-auto mb-4"
           />
@@ -91,7 +91,7 @@ export default function AboutFounder() {
               <span className="text-sm font-medium text-gray-900 dark:text-white">Instagram</span>
             </a>
             <a
-              href="mailto:swastikbiswal18@example.com"
+              href="mailto:swastikbiswal18@gmail.com"
               className="card p-4 flex flex-col items-center gap-2 hover:shadow-card-hover transition-all active:scale-[0.98]"
             >
               <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
