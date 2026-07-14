@@ -274,7 +274,7 @@ function FounderSection() {
       <div className="card p-5">
         <div className="flex items-center gap-4 mb-4">
           <img
-            src="../public/images/bullet.jpeg"
+            src="/images/bullet.jpeg"
             alt="Swastik Biswal"
             className="w-16 h-16 rounded-full object-cover ring-2 ring-cricket-100 dark:ring-gray-700"
           />
