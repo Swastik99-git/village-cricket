@@ -5,7 +5,8 @@ import PlayerAvatar from '../components/PlayerAvatar';
 import Spinner, { EmptyState } from '../components/Feedback';
 import { useAuth } from '../context/AuthContext';
 import { useMatches, useAnnouncements, useMatchPerformances } from '../hooks/useQueries';
-import { formatDate, formatTime, isToday, timeAgo } from '../lib/format';
+import { formatDate, formatTime, isToday } from '../lib/format';
+import CategoryBadge from '../components/CategoryBadge';
 import type { Match } from '../types';
 
 export default function Home() {
@@ -97,19 +98,27 @@ export default function Home() {
           {annLoading ? (
             <Spinner className="py-4" />
           ) : announcements && announcements.length > 0 ? (
-            <div className="space-y-3">
-              {announcements.slice(0, 3).map((ann) => (
-                <div key={ann.id} className="card p-4">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{ann.title}</h3>
-                    <span className="text-xs text-gray-400 shrink-0">{timeAgo(ann.created_at)}</span>
+            <>
+              <div className="space-y-3">
+                {announcements.slice(0, 3).map((ann) => (
+                  <div key={ann.id} className="card p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CategoryBadge category={ann.category} />
+                      <span className="text-xs text-gray-400">{formatDate(ann.created_at)}</span>
+                    </div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{ann.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">{ann.body}</p>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{ann.body}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+              {announcements.length > 3 && (
+                <Link to="/announcements" className="btn-secondary w-full mt-3 text-sm">
+                  View All Announcements
+                </Link>
+              )}
+            </>
           ) : (
-            <EmptyState title="No announcements" message="Check back later for updates." />
+            <EmptyState title="No announcements yet" message="Check back later for updates." />
           )}
         </section>
 

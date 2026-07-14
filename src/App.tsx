@@ -21,6 +21,8 @@ import CreateMatch from './pages/admin/CreateMatch';
 import EditMatch from './pages/admin/EditMatch';
 import Scorecard from './pages/admin/Scorecard';
 import CreateAnnouncement from './pages/admin/CreateAnnouncement';
+import ManageAnnouncements from './pages/admin/ManageAnnouncements';
+import Announcements from './pages/Announcements';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -115,6 +117,14 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/announcements"
+                element={
+                  <ProtectedRoute>
+                    <Announcements />
+                  </ProtectedRoute>
+                }
+              />
 
               {/* Admin routes */}
               <Route
@@ -154,6 +164,14 @@ export default function App() {
                 element={
                   <ProtectedRoute>
                     <CreateAnnouncement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/announcements"
+                element={
+                  <ProtectedRoute>
+                    <ManageAnnouncements />
                   </ProtectedRoute>
                 }
               />

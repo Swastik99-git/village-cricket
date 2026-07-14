@@ -60,13 +60,39 @@ export interface MatchPlayer {
   created_at: string;
 }
 
+export type AnnouncementCategory = 'match' | 'tournament' | 'general' | 'urgent';
+export type AnnouncementPriority = 'low' | 'medium' | 'high';
+
 export interface Announcement {
   id: string;
   title: string;
   body: string;
-  author_id: string | null;
+  category: AnnouncementCategory;
+  priority: AnnouncementPriority;
+  created_by: string | null;
   created_at: string;
+  expires_at: string | null;
 }
+
+export const CATEGORY_LABELS: Record<AnnouncementCategory, string> = {
+  general: 'General',
+  match: 'Match',
+  tournament: 'Tournament',
+  urgent: 'Urgent',
+};
+
+export const CATEGORY_COLORS: Record<AnnouncementCategory, string> = {
+  general: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+  match: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+  tournament: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
+  urgent: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+};
+
+export const PRIORITY_LABELS: Record<AnnouncementPriority, string> = {
+  low: 'Low',
+  medium: 'Medium',
+  high: 'High',
+};
 
 export interface PlayerCareerStats {
   player_id: string;

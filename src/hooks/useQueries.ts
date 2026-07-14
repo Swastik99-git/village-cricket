@@ -151,15 +151,16 @@ export function useAllPlayerStats() {
 }
 
 // --- Announcements ---
-export function useAnnouncements() {
+export function useAnnouncements(limit?: number) {
   return useQuery({
-    queryKey: ['announcements'],
+    queryKey: ['announcements', limit],
     queryFn: async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from('announcements')
         .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10);
+        .order('created_at', { ascending: false });
+      if (limit) query = query.limit(limit);
+      const { data, error } = await query;
       if (error) throw error;
       return data as Announcement[];
     },

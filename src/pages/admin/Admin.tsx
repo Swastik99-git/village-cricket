@@ -27,6 +27,12 @@ export default function Admin() {
       title: 'Publish Announcement',
       desc: 'Share news and updates with the community',
     },
+    {
+      to: '/admin/announcements',
+      icon: ClipboardList,
+      title: 'Manage Announcements',
+      desc: 'Edit or delete existing announcements',
+    },
   ];
 
   return (

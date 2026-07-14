@@ -5,6 +5,7 @@ import Layout from '../../components/Layout';
 import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../lib/supabase';
 import { useQueryClient } from '@tanstack/react-query';
+import type { AnnouncementCategory, AnnouncementPriority } from '../../types';
 
 export default function CreateAnnouncement() {
   const { profile, user } = useAuth();
@@ -13,6 +14,10 @@ export default function CreateAnnouncement() {
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [category, setCategory] = useState<AnnouncementCategory>('general');
+  const [priority, setPriority] = useState<AnnouncementPriority>('medium');
+  const [publishDate, setPublishDate] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -23,14 +28,25 @@ export default function CreateAnnouncement() {
     e.preventDefault();
     setError(null);
     if (!title.trim() || !body.trim()) {
-      setError('Title and message are required.');
+      setError('Title and description are required.');
+      return;
+    }
+    if (!publishDate) {
+      setError('Publish date is required.');
       return;
     }
     setSaving(true);
+    const publishAt = new Date(publishDate).toISOString();
+    const expiresAt = expiryDate ? new Date(expiryDate).toISOString() : null;
+
     const { error } = await supabase.from('announcements').insert({
       title: title.trim(),
       body: body.trim(),
-      author_id: user!.id,
+      category,
+      priority,
+      created_by: user!.id,
+      created_at: publishAt,
+      expires_at: expiresAt,
     });
     setSaving(false);
     if (error) {
@@ -38,7 +54,7 @@ export default function CreateAnnouncement() {
     } else {
       setSuccess(true);
       queryClient.invalidateQueries({ queryKey: ['announcements'] });
-      setTimeout(() => navigate('/'), 1500);
+      setTimeout(() => navigate('/admin/announcements'), 1500);
     }
   }
 
@@ -73,8 +89,33 @@ export default function CreateAnnouncement() {
               <input className="input-field" value={title} onChange={(e) => setTitle(e.target.value)} required placeholder="e.g. Practice match this Sunday" />
             </div>
             <div>
-              <label className="label-field">Message *</label>
+              <label className="label-field">Description *</label>
               <textarea className="input-field min-h-[140px] resize-none" value={body} onChange={(e) => setBody(e.target.value)} required placeholder="Write your announcement here..." />
+            </div>
+            <div>
+              <label className="label-field">Category *</label>
+              <select className="input-field" value={category} onChange={(e) => setCategory(e.target.value as AnnouncementCategory)}>
+                <option value="general">General</option>
+                <option value="match">Match</option>
+                <option value="tournament">Tournament</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+            <div>
+              <label className="label-field">Priority *</label>
+              <select className="input-field" value={priority} onChange={(e) => setPriority(e.target.value as AnnouncementPriority)}>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div>
+              <label className="label-field">Publish Date *</label>
+              <input type="datetime-local" className="input-field" value={publishDate} onChange={(e) => setPublishDate(e.target.value)} required />
+            </div>
+            <div>
+              <label className="label-field">Expiry Date (Optional)</label>
+              <input type="datetime-local" className="input-field" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} />
             </div>
           </div>
 
