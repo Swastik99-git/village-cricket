@@ -1,13 +1,4 @@
-/*
-# Storage Bucket for Profile Photos
 
-## Overview
-Creates a public storage bucket `profile-photos` for player profile pictures.
-
-## Notes
-1. Bucket is public so photos can be read without authentication.
-2. Storage policies allow authenticated users to upload to their own folder.
-*/
 
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('profile-photos', 'profile-photos', true)

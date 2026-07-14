@@ -1,28 +1,4 @@
-/*
-# Enhance Announcements Table
 
-## Overview
-Adds category, priority, created_by, and expires_at columns to the existing announcements table.
-Updates RLS policies so all authenticated users can read, but only admins can insert/update/delete.
-
-## Modified Tables
-### announcements (added columns)
-- `category` (text, NOT NULL, default 'general') — one of: match, tournament, general, urgent
-- `priority` (text, NOT NULL, default 'medium') — one of: low, medium, high
-- `created_by` (uuid, nullable, FK to profiles ON DELETE SET NULL) — tracks who created the announcement
-- `expires_at` (timestamptz, nullable) — optional expiry date
-
-## Security
-- SELECT: all authenticated users (TO authenticated USING (true)) — announcements are shared content
-- INSERT: only admins (WITH CHECK checks profiles.is_admin)
-- UPDATE: only admins
-- DELETE: only admins
-
-## Notes
-1. All columns use ADD COLUMN IF NOT EXISTS for idempotency.
-2. Existing rows get 'general' category and 'medium' priority by default.
-3. Policies are dropped and recreated to update from the original author_id-based policies.
-*/
 
 -- Add new columns
 ALTER TABLE announcements ADD COLUMN IF NOT EXISTS category text NOT NULL DEFAULT 'general';

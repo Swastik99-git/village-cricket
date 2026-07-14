@@ -1,33 +1,4 @@
-/*
-# Player Career Statistics View
 
-## Overview
-Creates a view `player_career_stats` that aggregates career statistics for each player from match_performances.
-
-## View: player_career_stats
-Columns:
-- `player_id` (uuid) — references profiles.id
-- `matches_played` (int) — count of distinct matches with a performance entry
-- `total_runs` (int) — sum of runs
-- `total_wickets` (int) — sum of wickets
-- `total_balls_faced` (int)
-- `total_overs_bowled` (numeric)
-- `total_runs_conceded` (int)
-- `highest_score` (int) — max runs in a single match (only when not out counts too)
-- `best_bowling_wickets` (int) — max wickets in a single match
-- `best_bowling_runs` (int) — runs conceded in that best-wickets match
-- `batting_average` (numeric) — total_runs / (innings where out), null if no outs
-- `strike_rate` (numeric) — runs per 100 balls faced
-- `bowling_average` (numeric) — runs_conceded per wicket
-- `economy` (numeric) — runs per over
-
-## Security
-Views inherit RLS from underlying tables. SELECT granted to authenticated.
-
-## Notes
-1. This is a VIEW, not a table — it recomputes on query.
-2. `best_bowling` is computed as the match with the most wickets; if tied, fewest runs conceded.
-*/
 
 CREATE OR REPLACE VIEW player_career_stats AS
 SELECT

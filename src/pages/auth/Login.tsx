@@ -116,14 +116,14 @@ export default function Login() {
       </form>
 
       {/* OR Divider */}
-      <div className="flex items-center gap-3 my-5">
+      {/* <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
         <span className="text-xs font-medium text-gray-400 uppercase">OR</span>
         <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
-      </div>
+      </div> */}
 
       {/* Google Sign In */}
-      <button
+      {/* <button
         type="button"
         onClick={handleGoogle}
         disabled={googleLoading}
@@ -131,7 +131,7 @@ export default function Login() {
       >
         {googleLoading ? <span className="w-5 h-5 border-2 border-gray-300 border-t-cricket-600 rounded-full animate-spin" /> : <GoogleIcon />}
         Continue with Google
-      </button>
+      </button> */}
     </AuthLayout>
   );
 }

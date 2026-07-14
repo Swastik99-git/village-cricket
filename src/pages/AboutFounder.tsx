@@ -69,7 +69,7 @@ export default function AboutFounder() {
           <h3 className="section-title mb-3">Get in Touch</h3>
           <div className="grid grid-cols-2 gap-3">
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/917609065467"
               target="_blank"
               rel="noopener noreferrer"
               className="card p-4 flex flex-col items-center gap-2 hover:shadow-card-hover transition-all active:scale-[0.98]"
@@ -80,7 +80,7 @@ export default function AboutFounder() {
               <span className="text-sm font-medium text-gray-900 dark:text-white">WhatsApp</span>
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/__the_dimple_guy___/?hl=en"
               target="_blank"
               rel="noopener noreferrer"
               className="card p-4 flex flex-col items-center gap-2 hover:shadow-card-hover transition-all active:scale-[0.98]"
@@ -91,7 +91,7 @@ export default function AboutFounder() {
               <span className="text-sm font-medium text-gray-900 dark:text-white">Instagram</span>
             </a>
             <a
-              href="mailto:swastik@example.com"
+              href="mailto:swastikbiswal18@example.com"
               className="card p-4 flex flex-col items-center gap-2 hover:shadow-card-hover transition-all active:scale-[0.98]"
             >
               <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
@@ -100,7 +100,7 @@ export default function AboutFounder() {
               <span className="text-sm font-medium text-gray-900 dark:text-white">Email</span>
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/Swastik99-git"
               target="_blank"
               rel="noopener noreferrer"
               className="card p-4 flex flex-col items-center gap-2 hover:shadow-card-hover transition-all active:scale-[0.98]"

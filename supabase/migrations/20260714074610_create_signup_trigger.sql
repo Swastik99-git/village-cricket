@@ -1,20 +1,4 @@
-/*
-# Auto-Create Profile on Signup + First User Admin
 
-## Overview
-1. Creates a trigger that auto-inserts a row in `profiles` when a new user signs up via Supabase Auth.
-2. The first registered user automatically becomes an admin (`is_admin = true`).
-3. Seeds sample matches and announcements for demo purposes.
-
-## Functions
-- `handle_new_user()`: inserts a profile row with the user's full_name from metadata.
-- `seed_demo_data()`: inserts 4 sample matches and 3 announcements (idempotent).
-
-## Notes
-1. The trigger runs AFTER INSERT on auth.users.
-2. First-user-admin logic: if no profiles exist yet, the new user gets is_admin = true.
-3. Demo data uses fixed UUIDs for match IDs so re-runs are idempotent.
-*/
 
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER
