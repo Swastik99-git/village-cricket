@@ -9,6 +9,7 @@ export interface Profile {
   bowling_style: string;
   photo_url: string;
   is_admin: boolean;
+  provider: string;
   created_at: string;
 }
 
@@ -25,6 +26,8 @@ export interface Match {
   team_b_score: string;
   team_a_overs: string;
   team_b_overs: string;
+  winning_margin: string;
+  man_of_match_player_id: string | null;
   notes: string;
   created_at: string;
 }
@@ -38,11 +41,22 @@ export interface MatchPerformance {
   balls_faced: number;
   is_out: boolean;
   dismissal: string;
+  fours: number;
+  sixes: number;
   bowling_order: number;
   wickets: number;
   overs_bowled: number;
   runs_conceded: number;
   maidens: number;
+  catches: number;
+  run_outs: number;
+  created_at: string;
+}
+
+export interface MatchPlayer {
+  id: string;
+  match_id: string;
+  player_id: string;
   created_at: string;
 }
 
@@ -62,6 +76,10 @@ export interface PlayerCareerStats {
   total_balls_faced: number;
   total_overs_bowled: number;
   total_runs_conceded: number;
+  total_fours: number;
+  total_sixes: number;
+  total_catches: number;
+  total_run_outs: number;
   highest_score: number;
   best_bowling_wickets: number;
   best_bowling_runs: number;
@@ -77,6 +95,10 @@ export interface PerformanceWithPlayer extends MatchPerformance {
 
 export interface PerformanceWithMatch extends MatchPerformance {
   matches?: Pick<Match, 'id' | 'team_a' | 'team_b' | 'match_date' | 'status'>;
+}
+
+export interface MatchPlayerWithProfile extends MatchPlayer {
+  profiles?: Pick<Profile, 'id' | 'full_name' | 'photo_url' | 'playing_role'>;
 }
 
 export const ROLE_LABELS: Record<PlayingRole, string> = {

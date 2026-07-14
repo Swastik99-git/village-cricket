@@ -8,8 +8,10 @@ interface AuthContextValue {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
+  needsProfileCompletion: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
+  signInWithGoogle: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: string | null }>;
   updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
@@ -86,6 +88,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   }
 
+  async function signInWithGoogle() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/`,
+      },
+    });
+    return { error: error?.message ?? null };
+  }
+
   async function signOut() {
     await supabase.auth.signOut();
     setProfile(null);
@@ -101,6 +113,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   }
 
+  const needsProfileCompletion =
+    !!session?.user &&
+    !!profile &&
+    profile.provider === 'google' &&
+    !profile.village;
+
   return (
     <AuthContext.Provider
       value={{
@@ -108,8 +126,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user: session?.user ?? null,
         profile,
         loading,
+        needsProfileCompletion,
         signUp,
         signIn,
+        signInWithGoogle,
         signOut,
         resetPassword,
         updatePassword,

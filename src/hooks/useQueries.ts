@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
-import type { Match, Announcement, PlayerCareerStats, Profile, PerformanceWithPlayer, PerformanceWithMatch } from '../types';
+import type { Match, Announcement, PlayerCareerStats, Profile, PerformanceWithPlayer, PerformanceWithMatch, MatchPlayerWithProfile } from '../types';
 
 // --- Matches ---
 export function useMatches() {
@@ -29,6 +29,24 @@ export function useMatch(matchId: string | undefined) {
         .maybeSingle();
       if (error) throw error;
       return data as Match | null;
+    },
+    enabled: !!matchId,
+  });
+}
+
+// --- Match Players ---
+export function useMatchPlayers(matchId: string | undefined) {
+  return useQuery({
+    queryKey: ['match-players', matchId],
+    queryFn: async () => {
+      if (!matchId) return [];
+      const { data, error } = await supabase
+        .from('match_players')
+        .select('*, profiles!match_players_player_id_fkey(id, full_name, photo_url, playing_role)')
+        .eq('match_id', matchId)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data as MatchPlayerWithProfile[];
     },
     enabled: !!matchId,
   });
@@ -209,4 +227,18 @@ export function useLeaderboard(period: 'all' | 'monthly') {
       };
     },
   });
+}
+
+// --- Invalidate all cricket queries (helper for mutations) ---
+export function useInvalidateCricket() {
+  const queryClient = useQueryClient();
+  return () => {
+    queryClient.invalidateQueries({ queryKey: ['matches'] });
+    queryClient.invalidateQueries({ queryKey: ['match-players'] });
+    queryClient.invalidateQueries({ queryKey: ['match-performances'] });
+    queryClient.invalidateQueries({ queryKey: ['player-stats'] });
+    queryClient.invalidateQueries({ queryKey: ['all-player-stats'] });
+    queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+    queryClient.invalidateQueries({ queryKey: ['player-performances'] });
+  };
 }

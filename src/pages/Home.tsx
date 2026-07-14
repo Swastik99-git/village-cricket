@@ -307,6 +307,9 @@ function FounderSection() {
             GitHub
           </a>
         </div>
+        <Link to="/about-founder" className="block mt-4 text-sm text-cricket-600 dark:text-cricket-400 font-medium text-center">
+          Learn more about the founder →
+        </Link>
       </div>
     </section>
   );

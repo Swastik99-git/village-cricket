@@ -1,10 +1,11 @@
 import { type ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Spinner from '../components/Feedback';
 
 export default function ProtectedRoute({ children }: { children: ReactNode }) {
-  const { session, loading } = useAuth();
+  const { session, loading, needsProfileCompletion } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -16,6 +17,10 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
 
   if (!session) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (needsProfileCompletion && location.pathname !== '/complete-profile') {
+    return <Navigate to="/complete-profile" replace />;
   }
 
   return <>{children}</>;

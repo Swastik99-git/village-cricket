@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import CompleteProfile from './pages/auth/CompleteProfile';
 import Home from './pages/Home';
 import Players from './pages/Players';
 import PlayerProfile from './pages/PlayerProfile';
@@ -14,8 +15,10 @@ import Matches from './pages/Matches';
 import MatchDetails from './pages/MatchDetails';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
+import AboutFounder from './pages/AboutFounder';
 import Admin from './pages/admin/Admin';
 import CreateMatch from './pages/admin/CreateMatch';
+import EditMatch from './pages/admin/EditMatch';
 import Scorecard from './pages/admin/Scorecard';
 import CreateAnnouncement from './pages/admin/CreateAnnouncement';
 
@@ -39,6 +42,14 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route
+                path="/complete-profile"
+                element={
+                  <ProtectedRoute>
+                    <CompleteProfile />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route
                 path="/"
@@ -96,6 +107,14 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/about-founder"
+                element={
+                  <ProtectedRoute>
+                    <AboutFounder />
+                  </ProtectedRoute>
+                }
+              />
 
               {/* Admin routes */}
               <Route
@@ -115,7 +134,15 @@ export default function App() {
                 }
               />
               <Route
-                path="/admin/scorecard"
+                path="/admin/match/:id/edit"
+                element={
+                  <ProtectedRoute>
+                    <EditMatch />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/scorecard/:id"
                 element={
                   <ProtectedRoute>
                     <Scorecard />
