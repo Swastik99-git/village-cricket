@@ -7,8 +7,6 @@ A modern and mobile-first web application built to organize village cricket matc
 🌐 **Live Demo**  
 https://village-cricket-pink.vercel.app/
 
-💻 **GitHub Repository**  
-https://github.com/Swastik99-git/village-cricket
 
 </div>
 
